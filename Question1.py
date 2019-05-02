@@ -17,8 +17,8 @@ paper = re.findall(page_pattern, html_str)
 
 paper_num = paper[0].split('of ')[1].split(" results")[0].strip()
 page_num = math.ceil(int(paper_num)/50)
-print("Paper num : " + str(paper_num))
-print("Page num : " + str(page_num))
+# print("Paper num : " + str(paper_num))
+# print("Page num : " + str(page_num))
 year_dict = {}
 for i in range(0,int(page_num)):
     url = "https://arxiv.org/search/?query=" + author + "&searchtype=author&abstracts=show&size=50&order=-announced_date_first&start="+str(i*50)
