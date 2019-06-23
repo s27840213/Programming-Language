@@ -3,22 +3,27 @@ import re
 import math
 import matplotlib.pyplot as plt
 
+
+# first, input the author name
 # author = "Ian+Goodfellow"
 author = input("Author name: ")
 author = author.replace(' ','+')
 
-
+#Sample code to get the html
 url = "https://arxiv.org/search/?query=" + author + "&searchtype=author"
 content = urllib.request.urlopen(url)
 html_str = content.read().decode('utf-8')
 
+# use regular expression to get paper num
 page_pattern = 'of [0-9]* results for author:'
 paper = re.findall(page_pattern, html_str)
 
+# get the exact num of papers
 paper_num = paper[0].split('of ')[1].split(" results")[0].strip()
 page_num = math.ceil(int(paper_num)/50)
 # print("Paper num : " + str(paper_num))
 # print("Page num : " + str(page_num))
+
 year_dict = {}
 for i in range(0,int(page_num)):
     url = "https://arxiv.org/search/?query=" + author + "&searchtype=author&abstracts=show&size=50&order=-announced_date_first&start="+str(i*50)
